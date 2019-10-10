@@ -1,5 +1,5 @@
 {
-  "name": "adeon-form",
+  "name": "@adeon/form",
   "version": "1.0.0",
   "description": "Smart React form component written with hooks",
   "repository": {
@@ -7,6 +7,15 @@
     "url": "https://github.com/AdeonMaster/adeon-form.git"
   },
   "homepage": "https://adeonmaster.github.io/adeon-form/",
+  "bugs": {
+    "url": "https://github.com/AdeonMaster/adeon-form/issues"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "form",
+    "adeon"
+  ],
   "main": "lib/index.js",
   "module": "es/index.js",
   "esnext": "src/index.js",
@@ -79,5 +88,9 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2"
+  },
+  "directories": {
+    "example": "example",
+    "lib": "lib"
   }
 }
