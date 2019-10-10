@@ -7,7 +7,7 @@ const fs = require('fs');
 const port = process.env.PORT || 8080;
 const app = express();
 
-const serverRootPath = path.join(__dirname + '/../dist');
+const serverRootPath = path.join(__dirname + '/../example');
 
 app.use(compression());
 app.use(express.static(serverRootPath, {

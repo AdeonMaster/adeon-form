@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Example Component Example Component matches snapshot 1`] = `
-<p>
-  Value is: 
-  love
-</p>
-`;

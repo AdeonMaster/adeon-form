@@ -6,8 +6,7 @@ const {
   optimizeCssAssetsPlugin,
   miniCssExtractPlugin,
   htmlWebpackPlugin,
-  copyWebpackPlugin,
-  offlinePlugin
+  copyWebpackPlugin
 } = require('./plugins');
 
 const mode = 'production';
@@ -16,9 +15,9 @@ console.log('Production build..');
 
 module.exports = () => ({
   mode,
-  entry: [
-    './src/index.js'
-  ],
+  entry: {
+    'example/main': './src/example/index.js'
+  },
   output: {
     filename: '[name].[contenthash].js',
     publicPath: '/'
@@ -46,8 +45,7 @@ module.exports = () => ({
     optimizeCssAssetsPlugin,
     miniCssExtractPlugin,
     htmlWebpackPlugin,
-    copyWebpackPlugin,
-    offlinePlugin
+    copyWebpackPlugin
   ],
   module: {
     rules

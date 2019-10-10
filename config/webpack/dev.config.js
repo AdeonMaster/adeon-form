@@ -1,7 +1,8 @@
 const rules = require('./rules');
 const {
-  cleanWebpackPlugin, miniCssExtractPlugin, envPlugin, htmlWebpackPlugin, copyWebpackPlugin, offlinePlugin
+  cleanWebpackPlugin, miniCssExtractPlugin, envPlugin, htmlWebpackPlugin, copyWebpackPlugin
 } = require('./plugins');
+const path = require('path');
 
 const mode = 'development';
 
@@ -10,11 +11,12 @@ console.log('Development build..');
 module.exports = () => ({
   mode,
   devtool: 'source-map',
-  entry: [
-    './src/index.js'
-  ],
+  entry: {
+    'main': './src/example/index.js',
+  },
   output: {
     filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname + '/../../example'),
     publicPath: '/'
   },
   optimization: {
@@ -35,8 +37,7 @@ module.exports = () => ({
     envPlugin(mode),
     miniCssExtractPlugin,
     htmlWebpackPlugin,
-    copyWebpackPlugin,
-    offlinePlugin
+    copyWebpackPlugin
   ],
   module: {
     rules

@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
 
 const envPlugin = (mode = 'development') => new webpack.DefinePlugin({
   'process.env': {
@@ -31,15 +30,9 @@ module.exports = {
   }),
   htmlWebpackPlugin: new HtmlWebpackPlugin({
     title: 'PWA Template',
-    template: 'src/template.html'
+    template: 'src/example/template.html'
   }),
   copyWebpackPlugin: new CopyWebpackPlugin([
-    { from: 'static' }
-  ]),
-  offlinePlugin: new OfflinePlugin({
-    appShell: '/',
-    externals: [
-      '/'
-    ]
-  })
+    { from: 'src/example/static' }
+  ])
 };

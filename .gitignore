@@ -1,4 +1,6 @@
 node_modules/
-dist/
-package-lock.json
 coverage/
+example/
+es/
+lib/
+package-lock.json
