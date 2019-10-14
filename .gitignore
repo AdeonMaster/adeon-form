@@ -1,6 +1,6 @@
-node_modules/
-coverage/
-example/
-es/
-lib/
-package-lock.json
+/node_modules
+/coverage
+/example
+/es
+/lib
+/package-lock.json
