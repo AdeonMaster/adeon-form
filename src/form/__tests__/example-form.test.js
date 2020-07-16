@@ -1,13 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+
 import { Form, Field } from '..';
 
-it('Renders correctly', () => {
-  const shallowCopy = shallow(
-    <Form>
-      <Field type="input" />
-    </Form>
-  );
+describe('Form', () => {
+  it('should render properly', () => {
+    const { container } = render(
+      <Form>
+        <Field name="email" type="text" defaultValue="example@gmail.com" />
+      </Form>,
+    );
 
-  expect(shallowCopy.debug()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });

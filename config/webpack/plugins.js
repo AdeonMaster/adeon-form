@@ -32,7 +32,9 @@ module.exports = {
     title: 'PWA Template',
     template: 'src/example/template.html'
   }),
-  copyWebpackPlugin: new CopyWebpackPlugin([
-    { from: 'src/example/static' }
-  ])
+  copyWebpackPlugin: new CopyWebpackPlugin({
+    patterns: [
+      { from: 'src/example/static' },
+    ],
+  })
 };

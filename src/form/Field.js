@@ -1,9 +1,9 @@
-import {
-  createElement, useEffect, useCallback, useMemo
-} from 'react';
+/* eslint sonarjs/cognitive-complexity:0 */
+
+import { createElement, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import withForm from './withForm';
+import useFormContext from './use-form-context';
 
 const getDefaultValue = (type, value, defaultValue, defaultChecked) => {
   switch (type) {
@@ -11,9 +11,7 @@ const getDefaultValue = (type, value, defaultValue, defaultChecked) => {
       return defaultChecked || false;
 
     case 'radio':
-      return defaultChecked
-        ? value
-        : '';
+      return defaultChecked ? value : '';
 
     default:
       return defaultValue || '';
@@ -21,63 +19,66 @@ const getDefaultValue = (type, value, defaultValue, defaultChecked) => {
 };
 
 const Field = ({
-  context, name, type, value, defaultValue, defaultChecked, children, component, ...otherProps
+  name,
+  type,
+  value,
+  defaultValue,
+  defaultChecked,
+  children,
+  component,
+  ...otherProps
 }) => {
-  const inputValue = useMemo(
-    () => {
-      const { state } = context;
+  const context = useFormContext();
 
-      return state[name] !== undefined
-        ? state[name]
-        : getDefaultValue(type, value, defaultValue, defaultChecked);
-    },
-    [context, name, type, value, defaultChecked, defaultValue]
-  );
+  const inputValue = useMemo(() => {
+    const { state } = context;
+
+    if (state[name] === undefined) {
+      return getDefaultValue(type, value, defaultValue, defaultChecked);
+    }
+
+    return state[name];
+  }, [context, name, type, value, defaultChecked, defaultValue]);
 
   const handleChange = useCallback(
-    event => {
+    (event) => {
       const { updateField } = context;
-      const inputValue = type === 'checkbox'
-        ? event.target.checked
-        : event.target.value;
+      const inputValue = type === 'checkbox' ? event.target.checked : event.target.value;
 
       updateField(name, inputValue);
     },
-    [context, name, type]
+    [context, name, type],
   );
 
-  const props = useMemo(
-    () => {
-      const commonProps = {
-        ...otherProps,
-        name,
-        type,
-        onChange: handleChange,
-      };
+  const props = useMemo(() => {
+    const commonProps = {
+      ...otherProps,
+      name,
+      type,
+      onChange: handleChange,
+    };
 
-      switch (type) {
-        case 'checkbox':
-          return {
-            ...commonProps,
-            checked: inputValue
-          };
+    switch (type) {
+      case 'checkbox':
+        return {
+          ...commonProps,
+          checked: inputValue,
+        };
 
-        case 'radio':
-          return {
-            ...commonProps,
-            value,
-            checked: inputValue === value
-          };
+      case 'radio':
+        return {
+          ...commonProps,
+          value,
+          checked: inputValue === value,
+        };
 
-        default:
-          return {
-            ...commonProps,
-            value: inputValue
-          };
-      }
-    },
-    [name, type, value, otherProps, inputValue, handleChange]
-  );
+      default:
+        return {
+          ...commonProps,
+          value: inputValue,
+        };
+    }
+  }, [name, type, value, otherProps, inputValue, handleChange]);
 
   useEffect(
     () => {
@@ -86,9 +87,9 @@ const Field = ({
 
       // mutate the context state trick
       if (
-        (type !== 'radio')
-        || (type === 'radio' && state[name] === undefined)
-        || (type === 'radio' && state[name] !== value && defaultChecked)
+        type !== 'radio' ||
+        (type === 'radio' && state[name] === undefined) ||
+        (type === 'radio' && state[name] !== value && defaultChecked)
       ) {
         state[name] = inputValue;
       }
@@ -96,10 +97,10 @@ const Field = ({
       // updateField(name, inputValue);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
-  if (typeof (children) === 'function') {
+  if (typeof children === 'function') {
     return children(props);
   }
 
@@ -116,12 +117,11 @@ const Field = ({
 };
 
 Field.propTypes = {
-  context: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   defaultValue: PropTypes.any,
   defaultChecked: PropTypes.bool,
-  children: PropTypes.any
+  children: PropTypes.any,
 };
 
-export default withForm(Field);
+export default Field;

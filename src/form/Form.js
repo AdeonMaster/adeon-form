@@ -10,35 +10,35 @@ const Form = ({ className, onSubmit, children }) => {
     (key, value) => {
       setState({
         ...state,
-        [key]: value
+        [key]: value,
       });
     },
-    [state]
+    [state],
   );
 
   const handleSubmit = useCallback(
-    event => {
+    (event) => {
       event.preventDefault();
 
       if (onSubmit) {
         onSubmit(state);
       }
     },
-    [onSubmit, state]
+    [onSubmit, state],
   );
 
   const provideValue = useMemo(
     () => ({
       updateField,
-      state
+      state,
     }),
-    [state, updateField]
+    [state, updateField],
   );
 
   return (
     <FormContext.Provider value={provideValue}>
       <form className={className} onSubmit={handleSubmit}>
-        {typeof (children) === 'function' ? children(state) : children}
+        {typeof children === 'function' ? children(state) : children}
       </form>
     </FormContext.Provider>
   );
@@ -47,7 +47,7 @@ const Form = ({ className, onSubmit, children }) => {
 Form.propTypes = {
   className: PropTypes.string,
   onSubmit: PropTypes.func,
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
 };
 
 export default Form;

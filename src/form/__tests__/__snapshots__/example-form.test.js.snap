@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders correctly 1`] = `
-"<ContextProvider value={{...}}>
-  <form className={[undefined]} onSubmit={[Function]}>
-    <withForm type=\\"input\\" />
-  </form>
-</ContextProvider>"
+exports[`Form should render properly 1`] = `
+<form>
+  <input
+    name="email"
+    type="text"
+    value="example@gmail.com"
+  />
+</form>
 `;

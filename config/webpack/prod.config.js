@@ -16,7 +16,7 @@ console.log('Production build..');
 module.exports = () => ({
   mode,
   entry: {
-    'example/main': './src/example/index.js'
+    'main': './src/example/index.js',
   },
   output: {
     filename: '[name].[contenthash].js',

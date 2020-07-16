@@ -1,6 +1,3 @@
 /node_modules
 /coverage
-/example
-/es
-/lib
 /package-lock.json

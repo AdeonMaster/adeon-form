@@ -5,7 +5,7 @@ const path = require('path');
 const port = process.env.PORT || 3030;
 const app = express();
 
-const serverRootPath = path.join(__dirname + '/../example');
+const serverRootPath = path.join(__dirname + '/../dist');
 
 app.use(compression());
 app.use(express.static(serverRootPath, {
