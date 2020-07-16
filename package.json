@@ -1,6 +1,6 @@
 {
   "name": "@adeon/form",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Smart React form component written with hooks",
   "repository": {
     "type": "git",
